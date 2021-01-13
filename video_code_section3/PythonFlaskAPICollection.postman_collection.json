@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "59707b7c-6556-49a8-80ff-219cb72a4121",
+		"name": "PythonFlaskAPICollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Section3",
+			"item": [
+				{
+					"name": "/store",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/store",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Another store\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/store",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/store/<name>",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/store/My Wonderful Store",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"store",
+								"My Wonderful Store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/store/<name>/item",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/store/My Wonderful Store/item",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"store",
+								"My Wonderful Store",
+								"item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/store/<name>/item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Another item\",\n    \"price\":15.99\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/store/My Wonderful Store/item",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"store",
+								"My Wonderful Store",
+								"item"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
