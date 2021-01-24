@@ -2,6 +2,11 @@
   "files.associations": {
     "iostream": "cpp"
   },
+  "python.linting.pylintArgs": [
+    "--load-plugins",
+    "pylint_flask_sqlalchemy",
+    "pylint_flask"
+  ],
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -11,5 +16,5 @@
   "python.formatting.blackArgs": ["--line-length", "120"],
   "python.formatting.provider": "black",
   "editor.formatOnSave": true,
-  "python.pythonPath": "section4/venv/bin/python" //change this according to the VENV that you are using o delete it
+  "python.pythonPath": "section6/venv/bin/python" //change this according to the VENV that you are using o delete it
 }
