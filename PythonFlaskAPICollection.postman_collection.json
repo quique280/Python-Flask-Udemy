@@ -775,6 +775,483 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Section11",
+			"item": [
+				{
+					"name": "/items",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT_Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/items",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items"
+							]
+						},
+						"description": "This should return a list of items, each in JSON format."
+					},
+					"response": []
+				},
+				{
+					"name": "/stores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/stores",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores"
+							]
+						},
+						"description": "This should return a list of stores, each in JSON format."
+					},
+					"response": []
+				},
+				{
+					"name": "/item/<name>",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT_Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/item/test",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"item",
+								"test"
+							]
+						},
+						"description": "This will return one specific item,unique identified by its name. No two items may have the same name."
+					},
+					"response": []
+				},
+				{
+					"name": "/item/<name>",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT_Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 15.99,\n    \"store_id\":1\n}"
+						},
+						"url": {
+							"raw": "{{url}}/item/<name>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"item",
+								"<name>"
+							]
+						},
+						"description": "This will create one specific item,unique identified by its name. No two items may have the same name."
+					},
+					"response": []
+				},
+				{
+					"name": "/item/<name>",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 17.99\n}"
+						},
+						"url": {
+							"raw": "{{url}}/item/<name>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"item",
+								"<name>"
+							]
+						},
+						"description": "This will create or if exists update, one specific item,unique identified by its name. No two items may have the same name."
+					},
+					"response": []
+				},
+				{
+					"name": "/item/<name>",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT_Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/item/<name>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"item",
+								"<name>"
+							]
+						},
+						"description": "This will delete one specific item,unique identified by its name."
+					},
+					"response": []
+				},
+				{
+					"name": "/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// var jsonData = JSON.parse(pm.response.json());",
+									"",
+									"pm.test(\"Access token exists\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.access_token).to.exist;",
+									"    pm.environment.set(\"JWT_Token\", jsonData.access_token);",
+									"});",
+									"",
+									"pm.test(\"Refresh token exists\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.refresh_token).to.exist;",
+									"    pm.environment.set(\"JWT_Refresh_Token\", jsonData.refresh_token);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"enrique\",\n    \"password\":\"1234\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "Login into the app"
+					},
+					"response": []
+				},
+				{
+					"name": "/logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Delete JWT from environment\", function () {",
+									"    pm.environment.set(\"JWT_Token\", '');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT_Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"logout"
+							]
+						},
+						"description": "Logout from the app"
+					},
+					"response": []
+				},
+				{
+					"name": "/refresh",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// var jsonData = JSON.parse(pm.response.json());",
+									"",
+									"pm.test(\"Access token exists\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.access_token).to.exist;",
+									"    pm.environment.set(\"JWT_Token\", jsonData.access_token);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT_Refresh_Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"enrique\",\n    \"password\":\"1234\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/refresh",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"refresh"
+							]
+						},
+						"description": "Refresh token"
+					},
+					"response": []
+				},
+				{
+					"name": "/register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"enrique\",\n    \"password\":\"1234\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register"
+							]
+						},
+						"description": "Register into the app"
+					},
+					"response": []
+				},
+				{
+					"name": "/store/<name>",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/store/<name>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"<name>"
+							]
+						},
+						"description": "This will return one specific store, uniquely identified by its name. No two stores may have the same name."
+					},
+					"response": []
+				},
+				{
+					"name": "/store/<name>",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/store/<name>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"<name>"
+							]
+						},
+						"description": "This will create and return one specific store, uniquely identified by its name. No two stores may have the same name."
+					},
+					"response": []
+				},
+				{
+					"name": "/store/<name>",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/store/<name>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"store",
+								"<name>"
+							]
+						},
+						"description": "This will delete and return one specific store, uniquely identified by its name. No two stores may have the same name."
+					},
+					"response": []
+				},
+				{
+					"name": "user/<user_id>",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/<user_id>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"<user_id>"
+							]
+						},
+						"description": "Get user info"
+					},
+					"response": []
+				},
+				{
+					"name": "user/<user_id>",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/<user_id>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"<user_id>"
+							]
+						},
+						"description": "Get user info"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
 		}
 	]
 }
